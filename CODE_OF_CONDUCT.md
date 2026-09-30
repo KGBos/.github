@@ -45,6 +45,6 @@ Maintainers should handle reports as privately as practical, investigate relevan
 
 Maintainers may moderate content, close or lock discussions, reject contributions, restrict participation, or take other proportionate action when needed to protect the project and its participants. Responses should consider the severity, persistence, context, and impact of the behavior and should favor repair when that is safe and realistic.
 
-## Attribution
+## Attribution and license
 
-This Code of Conduct is adapted from Contributor Covenant, version 3.0, stewarded by the [Organization for Ethical Source](https://ethicalsource.dev/) and licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+This Code of Conduct is adapted from Contributor Covenant, version 3.0, stewarded by the [Organization for Ethical Source](https://ethicalsource.dev/). Contributor Covenant 3.0 is licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), and this adaptation is distributed under the same license.
