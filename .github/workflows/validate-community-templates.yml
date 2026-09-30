@@ -1,0 +1,55 @@
+name: Validate shared GitHub templates
+
+on:
+  pull_request:
+    paths:
+      - ".github/ISSUE_TEMPLATE/**"
+      - ".github/workflows/validate-community-templates.yml"
+  push:
+    branches:
+      - master
+    paths:
+      - ".github/ISSUE_TEMPLATE/**"
+      - ".github/workflows/validate-community-templates.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate-issue-templates:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Install schema validator
+        run: python3 -m pip install --disable-pip-version-check "check-jsonschema==0.38.0"
+
+      - name: Validate Issue Forms
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t forms < <(
+            find .github/ISSUE_TEMPLATE -maxdepth 1 -type f \
+              \( -name '*.yml' -o -name '*.yaml' \) \
+              ! -name 'config.yml' ! -name 'config.yaml' \
+              -print | sort
+          )
+
+          if (( ${#forms[@]} > 0 )); then
+            check-jsonschema \
+              --builtin-schema vendor.github-issue-forms \
+              "${forms[@]}"
+          fi
+
+      - name: Validate Issue Template config
+        shell: bash
+        run: |
+          set -euo pipefail
+          for config in .github/ISSUE_TEMPLATE/config.yml .github/ISSUE_TEMPLATE/config.yaml; do
+            if [[ -f "$config" ]]; then
+              check-jsonschema \
+                --builtin-schema vendor.github-issue-config \
+                "$config"
+            fi
+          done
