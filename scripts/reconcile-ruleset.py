@@ -74,7 +74,7 @@ def main() -> int:
         )
 
     base = f"https://api.github.com/repos/{args.repo}/rulesets"
-    rulesets = request_json("GET", base, token)
+    rulesets = request_json("GET", f"{base}?includes_parents=false", token)
     existing = next((item for item in rulesets if item.get("name") == desired["name"]), None)
 
     if existing is None:
@@ -83,7 +83,7 @@ def main() -> int:
         return 0
 
     ruleset_id = existing["id"]
-    current = request_json("GET", f"{base}/{ruleset_id}", token)
+    current = request_json("GET", f"{base}/{ruleset_id}?includes_parents=false", token)
     if desired_matches_current(desired, current):
         print(f"ruleset {ruleset_id} already matches desired state")
         return 0
