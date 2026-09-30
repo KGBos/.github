@@ -1,37 +1,50 @@
 # Code of Conduct
 
-## Our standard
+This community code of conduct is adapted from [Contributor Covenant 3.0](https://www.contributor-covenant.org/version/3/0/), an established code of conduct for open source and other collaborative communities.
 
-We want project spaces where people can collaborate productively, ask questions, disagree, and improve the work without being treated poorly.
+## Our commitment
 
-Good participation includes:
+We are committed to making project spaces welcoming, safe, and constructive for people who participate in good faith. Everyone should be able to contribute without harassment, discrimination, intimidation, or degrading treatment.
 
-- being respectful and specific when giving feedback;
-- focusing criticism on ideas, code, behavior, and outcomes rather than people;
-- assuming good faith while still asking for evidence and clarity;
-- welcoming corrections and acknowledging mistakes;
-- respecting privacy and avoiding unnecessary disclosure of personal information; and
-- helping keep discussions relevant and useful to the project.
+## Expected behavior
 
-Unacceptable behavior includes:
+Participants should:
 
-- harassment, threats, intimidation, or sustained personal attacks;
-- discriminatory or demeaning comments about a person or group;
-- unwanted sexual attention or sexualized content directed at another participant;
-- publishing private or identifying information without permission;
-- deliberate disruption, spam, or repeated bad-faith participation; and
-- retaliation against someone for raising a good-faith concern.
+- respect the purpose of the project and keep discussions relevant to the work;
+- engage with others respectfully, honestly, and in good faith;
+- make room for different viewpoints and experiences;
+- give and receive constructive feedback without personal attacks;
+- take responsibility for mistakes and correct them when possible;
+- respect privacy, confidentiality, and clearly stated personal boundaries; and
+- credit the people and sources whose work they use.
+
+## Unacceptable behavior
+
+The following are not acceptable in project spaces:
+
+- harassment, threats, intimidation, or encouragement of harm;
+- insulting, demeaning, discriminatory, or stereotyped attacks on a person or group;
+- unwanted sexualized attention or behavior inappropriate to the project context;
+- publishing or acting on private information without permission;
+- impersonation used to deceive others or evade moderation;
+- plagiarism or knowingly failing to credit contributed material;
+- spam or commercial promotion unrelated to the purpose of the project; and
+- repeated behavior that materially disrupts the safety or usefulness of the community.
 
 ## Scope
 
-This code applies in repository discussions, issues, pull requests, reviews, and other project-managed spaces. It also applies when someone is clearly representing a project in an official capacity.
+This code applies to repository discussions, issues, pull requests, reviews, and other spaces managed by the project. It also applies when someone is officially representing the project in another venue.
 
-## Reporting concerns
+## Reporting a concern
 
-If a conduct concern should not be discussed publicly, contact the repository owner through a private contact method listed on their GitHub profile or in repository documentation. If no private contact method is available, open a minimal issue requesting private contact without including sensitive details.
+If a concern should not be discussed publicly, use a private contact method listed by the repository owner or in repository documentation. If no private contact method is available, open a minimal public issue asking how to make a private conduct report. Do not include sensitive details in that issue.
+
+Maintainers should handle reports as privately as practical, investigate relevant context, and avoid unnecessary disclosure about the people involved.
 
 ## Enforcement
 
-Maintainers may edit or remove content, close or lock discussions, reject contributions, or restrict participation when needed to protect the project and its participants. Responses should be proportionate to the behavior, context, and risk involved.
+Maintainers may moderate content, close or lock discussions, reject contributions, restrict participation, or take other proportionate action when needed to protect the project and its participants. Responses should consider the severity, persistence, context, and impact of the behavior and should favor repair when that is safe and realistic.
 
-Questions about how this code applies should be handled with the same emphasis on respectful, evidence-based discussion.
+## Attribution
+
+This Code of Conduct is adapted from Contributor Covenant, version 3.0, stewarded by the [Organization for Ethical Source](https://ethicalsource.dev/) and licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
