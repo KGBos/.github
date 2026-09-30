@@ -1,0 +1,29 @@
+name: Apply repository ruleset
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "rulesets/**"
+      - "scripts/reconcile-ruleset.py"
+      - ".github/workflows/apply-ruleset.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Validate desired ruleset
+        run: python3 scripts/reconcile-ruleset.py --dry-run >/dev/null
+
+      - name: Apply desired ruleset
+        env:
+          RULESET_ADMIN_TOKEN: ${{ secrets.RULESET_ADMIN_TOKEN }}
+        run: python3 scripts/reconcile-ruleset.py
