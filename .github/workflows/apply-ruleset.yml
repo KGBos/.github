@@ -1,6 +1,11 @@
-name: Apply repository ruleset
+name: Repository ruleset
 
 on:
+  pull_request:
+    paths:
+      - "rulesets/**"
+      - "scripts/reconcile-ruleset.py"
+      - ".github/workflows/apply-ruleset.yml"
   push:
     branches:
       - master
@@ -14,14 +19,22 @@ permissions:
   contents: read
 
 jobs:
-  apply:
+  validate:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Validate desired ruleset
         run: python3 scripts/reconcile-ruleset.py --dry-run >/dev/null
+
+  apply:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Apply desired ruleset
         env:
