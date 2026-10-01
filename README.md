@@ -2,7 +2,7 @@
 
 This public `.github` repository provides shared GitHub community-health defaults for repositories owned by `KGBos` that do not define their own equivalent files.
 
-The initial baseline is intentionally conservative. It is assembled from established public GitHub patterns first; KGBos-specific workflow conventions will be considered separately after this baseline is reviewed.
+The initial community-health baseline is intentionally conservative. It is assembled from established public GitHub patterns first; KGBos-specific workflow conventions are considered separately rather than being mixed into the generic defaults.
 
 ## Shared defaults
 
@@ -14,15 +14,23 @@ The initial baseline is intentionally conservative. It is assembled from establi
 
 GitHub gives repository-local community-health files precedence over these defaults. A project can therefore replace any shared default with guidance that better fits that repository.
 
+## Development workflow baseline
+
+[`docs/development-workflow.md`](docs/development-workflow.md) records a separate, neutral issue/branch/pull-request/CI/review/merge baseline derived primarily from conventional GitHub Flow and pull-request practice.
+
+[`AGENTS.md`](AGENTS.md) is the agent-facing entry point for that baseline. Unlike GitHub community-health defaults, `AGENTS.md` is **not automatically inherited** by other repositories. Downstream repositories or agent runtimes must explicitly reference, copy, or synchronize it if they want to adopt it.
+
+The development baseline deliberately stops short of KGBos-specific orchestration such as the conveyor-belt model, dispatcher behavior, named builder/reviewer roles, reviewer quorum, merge ownership, or deployment state machines. Those should be evaluated separately after the neutral baseline is exercised in real work.
+
 ## What is intentionally not global
 
-The baseline does not impose a shared license, CODEOWNERS file, funding configuration, formal governance model, support channel, project-specific CI, CLA/DCO requirement, labels, assignees, or repository-specific test commands. Those require project or account-specific decisions and should not be invented by a generic default.
+The community-health baseline does not impose a shared license, CODEOWNERS file, funding configuration, formal governance model, support channel, project-specific CI, CLA/DCO requirement, labels, assignees, or repository-specific test commands. Those require project or account-specific decisions and should not be invented by a generic default.
 
-Likewise, custom KGBos conventions around agents, decision gates, issue decomposition, deployment modes, and similar workflow rules are intentionally deferred to a later layer.
+Likewise, repository-specific architecture, build commands, release processes, deployment procedures, and ownership remain local even when a repository adopts the shared development workflow baseline.
 
 ## Research
 
-The comparison set and rationale for this baseline are recorded under [`docs/research/`](docs/research/).
+The community-health comparison set and rationale are recorded under [`docs/research/`](docs/research/). The development workflow document records its own primary GitHub sources.
 
 ## Repository self-governance
 
