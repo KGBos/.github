@@ -1,0 +1,56 @@
+name: Reusable ShellCheck
+
+on:
+  workflow_call:
+    inputs:
+      runner:
+        description: JSON array of runner labels for runs-on.
+        required: false
+        type: string
+        default: '["ubuntu-latest"]'
+
+permissions:
+  contents: read
+
+jobs:
+  shellcheck:
+    name: Lint changed shell scripts
+    timeout-minutes: 10
+    runs-on: ${{ fromJSON(inputs.runner) }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Run ShellCheck on changed scripts
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [[ -n "${BASE_SHA:-}" ]]; then
+            range="${BASE_SHA}...HEAD"
+          elif git rev-parse HEAD~1 >/dev/null 2>&1; then
+            range="HEAD~1...HEAD"
+          else
+            range="HEAD"
+          fi
+
+          files=()
+          while IFS= read -r file; do
+            if [[ -n "$file" && -f "$file" ]]; then
+              files+=("$file")
+            fi
+          done < <(git diff --name-only --diff-filter=ACMR "$range" -- '*.sh')
+
+          if [[ ${#files[@]} -eq 0 ]]; then
+            echo "No shell scripts changed."
+            exit 0
+          fi
+
+          printf 'Linting:\n'
+          printf '  %s\n' "${files[@]}"
+          shellcheck "${files[@]}"
