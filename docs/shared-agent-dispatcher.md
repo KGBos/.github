@@ -85,8 +85,9 @@ jobs:
     with:
       route-config-path: .github/agent-dispatch.json
       event-kind: ${{ github.event_name }}
-    secrets: inherit
 ```
+
+Do not pass caller secrets to the validation workflow. If a caller-owned execution job needs a secret, pass only that named secret there with the minimum permissions.
 
 The exact syntax is illustrative, not an implementation commitment. The important contract is that the caller owns `on:` and explicitly invokes a versioned shared controller.
 
