@@ -87,6 +87,41 @@ paragraphs intact and do not add hard breaks just to control how text appears
 in a viewer. Keep links, headings, tables, and code readable; do not split a
 link or code token just to meet the column target.
 
+## Help readers learn
+
+Assume a reader may be learning the system, even when the task is routine
+maintenance. Explain unfamiliar terms when they matter and give the reason for
+non-obvious or consequential steps. Use concise examples and expected results
+when they help a reader build a correct mental model.
+
+Keep procedures easy to follow. Put required actions in order, and link to
+concept explanations or separate optional detail from the main steps. Do not
+turn every page into a tutorial; choose the depth that fits the reader's goal.
+
+## Use GitHub formatting selectively
+
+When GitHub is the primary renderer, use its Markdown features when they make
+information easier to scan or understand. GitHub alerts are block callouts,
+not hover tooltips. Choose their built-in types by purpose:
+
+- `NOTE`: useful context that does not change the required action.
+- `TIP`: a helpful technique or shortcut.
+- `IMPORTANT`: information needed to complete the task correctly.
+- `WARNING`: a serious hazard that requires immediate attention.
+- `CAUTION`: a meaningful risk or possible negative outcome.
+
+Use alerts sparingly and do not invent new alert labels. For teaching context,
+prefer a short **Why this matters:** paragraph; place optional deeper detail
+in a clearly named `<details>` section when the document is GitHub-specific.
+Keep steps and safety-critical facts visible outside collapsed sections.
+
+Use Mermaid diagrams when a flow or relationship is clearer visually than in
+prose, and include a short explanation for readers who cannot use the diagram.
+Use raw HTML only when Markdown cannot express the needed structure. Avoid
+custom styling and layout tricks; GitHub sanitizes HTML, and other Markdown
+renderers may handle it differently. Preview GitHub-specific formatting before
+relying on it.
+
 ## Review according to risk
 
 Review the documentation in the same change as the behavior or policy it
