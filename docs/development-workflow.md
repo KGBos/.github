@@ -136,9 +136,13 @@ These may be valuable, but they should be introduced because they solve observed
 
 ## Agent instruction boundary
 
-The canonical shared agent entry point is [`../AGENTS.md`](../AGENTS.md).
+The portable baseline source is [`../agent-policy/AGENTS.shared.md`](../agent-policy/AGENTS.shared.md). The root [`../AGENTS.md`](../AGENTS.md) is rendered from that source plus [`../AGENTS.local.md`](../AGENTS.local.md).
 
 `AGENTS.md` is not a GitHub default community-health file and is not automatically inherited by repositories owned by `KGBos`. A repository or agent runtime must explicitly reference, copy, or synchronize the shared instructions if it wants to use them. Repository-local and more-specific instructions take precedence for the files they govern.
+
+Downstream repositories should keep a local rules file, a lock file naming this repository, the source file path, the renderer path, and SHA-256 digests. To adopt an update, run the vendored renderer with `--sync-ref <full-commit-sha>`; it fetches only those two files from that exact commit, refreshes the lock and generated output, and does not need credentials because this source repository is public. CI should run the renderer's `--check` mode against the vendored files and lock without network access.
+
+When a repository is cloned, checked out, or materialized after a conversation starts, the agent must read its root and applicable nested `AGENTS.md` files before inspecting or changing project files. Agents must not assume their runtime reloads repository instructions after checkout. Any linked instruction document that applies must be opened explicitly.
 
 ## Basis
 
