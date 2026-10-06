@@ -27,6 +27,13 @@ A useful pull request should explain:
 
 Add or update tests and documentation when they are relevant to the change. If a normal verification step cannot be run, say so clearly in the pull request rather than leaving the reviewer to infer it.
 
+## Documentation
+
+When changing docs in a repository that adopts the shared guide, follow the
+[KGBos documentation standard](docs/documentation-standard.md). Repository
+instructions still own technical truth, live-state evidence, and required
+checks.
+
 ## Reviews
 
 Review feedback is part of the contribution process. Address substantive comments, resolve misunderstandings with evidence, and keep discussion focused on the work.
