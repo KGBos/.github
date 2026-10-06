@@ -47,7 +47,7 @@ This document extends the earlier [shared community-health baseline](baseline-co
 
 ## Evidence-backed candidate defaults
 
-These are proposals for discussion, not accepted policy. Each follows from repeated patterns or a documented platform constraint rather than one organization's size or tools.
+These candidates follow from repeated patterns or documented platform constraints rather than one organization's size or tools. Since this research snapshot, Leon resolved the issue-first and agent-review questions in issues #18 and #19; those choices were incorporated into the shared baseline in [PR #21](https://github.com/KGBos/.github/pull/21). The other candidates below remain research input, not accepted policy.
 
 1. **Track non-trivial work before implementation; keep the gate proportional.** Use an issue or discussion for a change needing design, coordination, or a durable decision. Permit tiny, obvious fixes to go directly to PR. Do not require assignment or explicit pre-approval for every change without a demonstrated need.
 2. **Keep intake taxonomy small globally and richer locally.** A generic bug/feature intake is portable. Use local labels, types, fields, and title conventions only where they support actual triage; record that personal repositories may not have organization-level issue fields/types.
@@ -58,14 +58,14 @@ These are proposals for discussion, not accepted policy. Each follows from repea
 7. **Do not imply automatic agent-instruction inheritance.** Shared rules need an explicit adoption mechanism; repository-specific instruction files remain authoritative for local commands and operational constraints.
 8. **Separate merge from deployment acceptance.** If a repository deploys from CI, define its deployment target, protections, verification, and rollback locally. A green PR check is not proof that a live deployment is healthy.
 
-## Material choices still needing Leon's decision
+## Decisions resolved since the research snapshot
 
-The sources show genuine tradeoffs, not a single best practice:
+The evidence shows genuine tradeoffs rather than one universal practice. Leon resolved these two choices after the research snapshot:
 
-- **Mandatory independent review before merge:** large teams make independent review a required control; GitHub provides optional enforcement; some repositories reject outside PRs entirely; a personal portfolio may have no independent human reviewer available. [Decision #18](https://github.com/KGBos/.github/issues/18) asks whether the shared baseline should recommend review, require it for agent-authored changes, or leave enforcement to each repository's branch rules, and whether the reviewer must be human. The current neutral workflow document avoids setting a universal reviewer identity or quorum.
-- **How strong the issue-first gate should be:** sources range from discussion/issue before major work to an assigned/approved issue before implementation, while others permit small changes directly. [Decision #19](https://github.com/KGBos/.github/issues/19) asks whether the shared baseline should require explicit issue approval before non-trivial implementation, and where exceptions belong. The current baseline uses a proportional middle ground.
+- **Agent-authored PR review ([issue #18](https://github.com/KGBos/.github/issues/18)):** independent review remains recommended, not universally required. A human or a separate agent identity may review; each repository decides whether to enforce approval. This is recorded in the shared [development workflow](https://github.com/KGBos/.github/blob/master/docs/development-workflow.md) and [PR #21](https://github.com/KGBos/.github/pull/21).
+- **Issue-first gate ([issue #19](https://github.com/KGBos/.github/issues/19)):** track non-trivial work, allow very small low-risk fixes to start directly, and do not require a separate approval marker. The shared workflow gives typo and broken-link corrections as examples; repositories may set stricter local gates. This is recorded in the shared [development workflow](https://github.com/KGBos/.github/blob/master/docs/development-workflow.md) and [PR #21](https://github.com/KGBos/.github/pull/21).
 
-These choices should be resolved before changing the shared workflow baseline. CI implementation in [#15](https://github.com/KGBos/.github/issues/15) remains limited to repositories Leon confirms are active; this research does not inventory private repositories or authorize any migration.
+CI implementation in [issue #15](https://github.com/KGBos/.github/issues/15) remains limited to repositories Leon confirms are active. This research does not inventory private repositories or authorize any migration.
 
 ## Source index
 
