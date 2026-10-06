@@ -127,18 +127,20 @@ Do not maintain an organization-wide list of personal agent identities in `KGBos
 
 The controller should fail closed when authorization cannot be established.
 
-## Idempotency and concurrency
+## Delivery guarantees, idempotency, and concurrency
 
-Treat concurrency and idempotency as separate controls.
+The design should promise at-least-once delivery of accepted requests with an idempotent consumer, or define a transactional handoff. A durable idempotency key and serialized workflow runs alone cannot guarantee exactly-once delivery or effects across the controller and a repo-local runtime.
 
-- **Concurrency** serializes competing work for the same repository item.
-- **Idempotency** prevents the same dispatch request from executing twice.
+- **Idempotency** lets the consumer recognize retries of the same request; it does not deduplicate distinct authorized requests for the same item.
+- **Concurrency** limits simultaneous work; it does not guarantee that every request remains queued.
 
 The normalized request should include a deterministic idempotency key derived from stable event identity plus repository/item/target context.
 
-A shared library can define the key format, but the durable record of consumed keys must be owned by a storage mechanism that actually survives across jobs/runs. A runner-local `/tmp` file is useful for unit tests but is not a cross-run idempotency store.
+A shared library can define the key format, but durable request state must be owned by storage that survives across jobs and runs. Persist an accepted request as pending before handoff, retry delivery with the same key until the repo-local consumer durably acknowledges acceptance, and have the consumer atomically record/deduplicate that key with enqueueing or applying the operation. A repeated key should return the prior acknowledgment without repeating the effect. If the consumer cannot make that operation atomic, use a transactional handoff or document duplicate/loss recovery semantics instead of claiming exactly-once effects. A runner-local `/tmp` file is useful for unit tests but is not cross-run request or idempotency storage.
 
-Before extracting the current implementation, choose and test a durable mechanism. Reasonable GitHub-native options include a repository-visible state marker/comment, an artifact/cache with carefully defined semantics, or another explicit repository-owned state record. The choice should be evaluated for race behavior and retry ergonomics before being standardized.
+GitHub Actions concurrency can limit simultaneous workers, but it is not by itself a durable dispatch queue. By default, a concurrency group keeps at most one pending run and replaces an older pending run when a newer one arrives. The optional `queue: max` setting retains up to 100 pending runs; additional runs are canceled when that limit is full. Neither mode provides an unbounded durable request log. See [GitHub's concurrency documentation](https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency).
+
+For distinct requests that must each run, durably enqueue them before scheduling workers and provide a way to drain or reconcile the queue after a workflow wake-up is replaced or canceled. If same-item requests are safely coalescible, define which requests supersede one another and reconcile the latest desired state; otherwise retain each accepted request. Use Actions concurrency only to limit worker overlap after this delivery behavior is defined.
 
 ## Security boundary for the public `.github` repository
 
@@ -168,7 +170,7 @@ Secrets should be resolved only in the caller repository and passed with the sma
 
 ## Relationship to the agent operating workflow
 
-Dispatch answers one question: **how does an authorized repository event wake a configured execution target exactly once?**
+Dispatch answers one question: **how is an authorized repository event delivered to a configured execution target, with retries made safe and accepted requests not silently lost?**
 
 The later agent operating workflow answers different questions: **who builds, who reviews, who may approve, who merges, and what constitutes done?**
 
@@ -220,7 +222,8 @@ A shared schema may validate the shape, but the data remains local.
 
 ## Open questions before implementation
 
-- Which durable GitHub-native idempotency store has acceptable race and retry behavior?
+- Which durable request queue/outbox and consumer acknowledgment/deduplication protocol has acceptable race and retry behavior?
+- Are same-item requests distinct work that must all run, or can newer requests supersede older ones and be handled by reconciling the latest state?
 - Should the shared surface be only a reusable workflow, or a reusable workflow wrapping a composite/JavaScript/Python action?
 - Which lifecycle/status operations belong in the shared controller versus the caller?
 - Should actor authorization accept `maintain` in addition to `admin`/`write`, or should that remain caller-configurable?
@@ -230,7 +233,9 @@ A shared schema may validate the shape, but the data remains local.
 
 The design is ready for an implementation issue when:
 
-- a durable idempotency mechanism is chosen;
+- the at-least-once/idempotent-consumer or transactional-handoff contract is chosen, including crash behavior before handoff and after handoff but before acknowledgment;
+- distinct-request retention or safe coalescing is defined, including recovery from replaced/canceled workflow wake-ups and queue overflow;
+- the pilot has tests for those crash, retry, duplicate-delivery, and concurrency/overflow cases;
 - a second pilot repository or fixture is identified;
 - the normalized payload/config schemas are agreed;
 - the caller/shared responsibility boundary above is accepted;
