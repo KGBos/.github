@@ -28,9 +28,11 @@ follow-up / cleanup
 
 ### 1. Start from clear work
 
-For non-trivial changes, begin from an issue, task, bug report, or other durable description of the problem and expected result.
+For non-trivial changes, begin from an issue, task, bug report, or other durable description of the problem and expected result. The description should make the scope and intended result clear enough to guide implementation.
 
-Very small maintenance changes may begin directly when a separate issue would add no useful context. Repositories may require issue-first work locally.
+Very small, self-contained, low-risk maintenance changes (for example, correcting a typo or broken link) may begin directly when a separate issue would add no useful context. Repositories may require issue-first work locally.
+
+This is a tracking threshold, not a separate approval gate: the shared baseline does not require an `approved` label, checkbox, or other approval marker before implementation begins. Repositories may add stricter local requirements.
 
 Before changing code, read the repository's contribution guidance and agent instructions. Repository-local instructions are authoritative for repository-specific commands, architecture, ownership, and safety constraints.
 
@@ -87,7 +89,9 @@ When review identifies a problem, update the same branch and pull request unless
 
 Resolve meaningful review conversations before merge. Repository rules determine whether an approval is required and who is eligible to provide it.
 
-For agent-authored work, an independent human or agent review can provide useful separation between implementation and checking, but this baseline does not prescribe a specific reviewer identity, quorum, or merge owner. Those are repository or later KGBos policy decisions.
+For agent-authored work, independent review is recommended to provide separation between implementation and checking. The reviewer may be a human or a separate agent acting through its own identity; the author should not count as the independent reviewer of its own pull request.
+
+This recommendation is not a universal merge requirement. Each repository decides whether to enforce review through its branch rules or rulesets, and sets any required reviewer count and merge ownership locally.
 
 ### 7. Merge only when the repository's gates are satisfied
 
@@ -127,7 +131,6 @@ The following are intentionally left to repository-local policy or a later share
 - environment-specific verification;
 - repository-specific test commands;
 - CODEOWNERS or component ownership;
-- whether every change must have a pre-existing issue.
 
 These may be valuable, but they should be introduced because they solve observed problems rather than being assumed as part of the neutral baseline.
 

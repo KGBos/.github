@@ -10,14 +10,14 @@ Follow the shared baseline in [`docs/development-workflow.md`](docs/development-
 
 In short:
 
-1. understand the tracked work and repository guidance;
+1. understand tracked work and repository guidance; start non-trivial changes from an issue or task, while very small, low-risk maintenance may start directly;
 2. work on a short-lived branch rather than the protected default branch;
 3. keep the change focused;
 4. inspect the diff and run relevant repository-defined verification;
 5. open a clear pull request;
 6. let required automated checks run on the current head;
-7. address review feedback;
-8. merge only when the repository's required gates are satisfied.
+7. address review feedback; independent review of agent-authored pull requests is recommended and may come from a human or separate agent identity;
+8. merge only when repository gates are satisfied; each repository decides whether to require review approval.
 
 ## Instruction precedence
 
