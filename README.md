@@ -32,6 +32,8 @@ Likewise, repository-specific architecture, build commands, release processes, d
 
 The community-health comparison set and rationale are recorded under [`docs/research/`](docs/research/). The development workflow document records its own primary GitHub sources.
 
+The evidence matrix for issue taxonomy, decision gates, PR review, CI, deployment handoff, agent instructions, security, and reusable workflows is in [`docs/research/shared-engineering-governance.md`](docs/research/shared-engineering-governance.md). It is a research proposal, not accepted policy.
+
 ## Repository self-governance
 
 The `rulesets/`, `scripts/`, and `.github/workflows/apply-ruleset.yml` files manage this repository's own branch rules as code. They are implementation infrastructure for this repository, not inherited community-health defaults for other repositories.
