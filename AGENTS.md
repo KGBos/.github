@@ -5,6 +5,11 @@
 
 This policy is the portable development baseline for KGBos repositories. Repository-specific instructions and direct task requirements take precedence where they are more specific. Read the most specific applicable `AGENTS.md` before changing files.
 
+The shared CI runner-host policy is documented in
+[`docs/ci-runner-policy.md`](docs/ci-runner-policy.md). Each repository must
+explicitly adopt it; this link does not configure or verify that repository's
+runners.
+
 ## Load instructions after checkout
 
 - If a repository, worktree, or checkout appears after the conversation starts, read its root `AGENTS.md` and all applicable nested `AGENTS.md` files before inspecting or editing project files.
@@ -53,6 +58,8 @@ This policy is the portable development baseline for KGBos repositories. Reposit
 - Never claim tests, checks, reviews, deployments, or production verification happened when they did not.
 - Do not bypass failing required checks or unresolved blocking review feedback merely to complete a merge.
 - Do not assume that authoring a change grants authority to approve or merge it; follow the target repository's configured policy.
+
+## Repository and agent boundaries
 
 - Follow the most specific applicable repository instructions for architecture, commands, ownership, safety, review readiness, and deployment.
 - Do not assume `AGENTS.md` is automatically inherited across repositories or supported identically by every agent runtime. Repositories adopting this baseline should check in a generated copy with their local rules.
