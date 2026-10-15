@@ -54,6 +54,8 @@ This policy is the portable development baseline for KGBos repositories. Reposit
 - Do not bypass failing required checks or unresolved blocking review feedback merely to complete a merge.
 - Do not assume that authoring a change grants authority to approve or merge it; follow the target repository's configured policy.
 
+## Repository and agent boundaries
+
 - Follow the most specific applicable repository instructions for architecture, commands, ownership, safety, review readiness, and deployment.
 - Do not assume `AGENTS.md` is automatically inherited across repositories or supported identically by every agent runtime. Repositories adopting this baseline should check in a generated copy with their local rules.
 - Keep personal preferences in the user's own agent configuration; do not move private preferences into shared repository policy.
