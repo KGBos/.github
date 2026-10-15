@@ -20,6 +20,15 @@ GitHub gives repository-local community-health files precedence over these defau
 
 [`AGENTS.md`](AGENTS.md) is the agent-facing entry point for that baseline. Unlike GitHub community-health defaults, `AGENTS.md` is **not automatically inherited** by other repositories. Downstream repositories or agent runtimes must explicitly reference, copy, or synchronize it if they want to adopt it.
 
+[`docs/documentation-standard.md`](docs/documentation-standard.md) is an
+optional shared default for documentation structure, evidence, and review.
+Repositories must explicitly adopt it; local technical and safety contracts
+remain authoritative.
+
+[`docs/review-guidelines.md`](docs/review-guidelines.md) provides a shared
+pull request review standard, covering review verdicts, top-level review
+formatting, and optional inline priority tags.
+
 The development baseline deliberately stops short of KGBos-specific orchestration such as the conveyor-belt model, dispatcher behavior, named builder/reviewer roles, reviewer quorum, merge ownership, or deployment state machines. Those should be evaluated separately after the neutral baseline is exercised in real work.
 
 ## What is intentionally not global
