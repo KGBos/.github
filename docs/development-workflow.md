@@ -83,7 +83,7 @@ Repositories should use branch protection or rulesets when they need these requi
 
 ### 6. Review and incorporate feedback
 
-Review should focus on correctness, security, maintainability, scope, test evidence, and consistency with repository guidance.
+Review should focus on correctness, security, maintainability, scope, test evidence, and consistency with repository guidance. Follow [`review-guidelines.md`](review-guidelines.md) for shared review formatting, structured verdicts (`APPROVE`, `REQUEST_CHANGES`, `COMMENT`), evidence reporting, and optional inline priority tags.
 
 When review identifies a problem, update the same branch and pull request unless the feedback is intentionally out of scope. Re-request review after substantial changes when appropriate.
 

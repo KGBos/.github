@@ -36,6 +36,6 @@ checks.
 
 ## Reviews
 
-Review feedback is part of the contribution process. Address substantive comments, resolve misunderstandings with evidence, and keep discussion focused on the work.
+Review feedback is part of the contribution process. Address substantive comments, resolve misunderstandings with evidence, and keep discussion focused on the work. For shared review formatting, verdicts, and optional inline priority badges, see the [review guidelines](docs/review-guidelines.md).
 
 Maintainers may ask for a change to be split, reduced in scope, or adapted to repository-specific constraints before it can be merged.

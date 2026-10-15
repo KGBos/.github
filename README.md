@@ -25,6 +25,10 @@ optional shared default for documentation structure, evidence, and review.
 Repositories must explicitly adopt it; local technical and safety contracts
 remain authoritative.
 
+[`docs/review-guidelines.md`](docs/review-guidelines.md) provides a shared
+pull request review standard, covering review verdicts, top-level review
+formatting, and optional inline priority tags.
+
 The development baseline deliberately stops short of KGBos-specific orchestration such as the conveyor-belt model, dispatcher behavior, named builder/reviewer roles, reviewer quorum, merge ownership, or deployment state machines. Those should be evaluated separately after the neutral baseline is exercised in real work.
 
 ## What is intentionally not global
