@@ -6,7 +6,7 @@
 This policy is the portable development baseline for KGBos repositories. Repository-specific instructions and direct task requirements take precedence where they are more specific. Read the most specific applicable `AGENTS.md` before changing files.
 
 The shared CI runner-host policy is documented in
-[`docs/ci-runner-policy.md`](docs/ci-runner-policy.md). Each repository must
+[`docs/ci-runner-policy.md`](https://github.com/KGBos/.github/blob/master/docs/ci-runner-policy.md). Each repository must
 explicitly adopt it; this link does not configure or verify that repository's
 runners.
 
@@ -44,11 +44,11 @@ runners.
   Briefly explain unfamiliar terms and why non-obvious steps matter as you go;
   keep explanations tied to the task and add depth when requested.
 - For documentation changes, follow
-  [`docs/documentation-standard.md`](docs/documentation-standard.md) when the
+  [`docs/documentation-standard.md`](https://github.com/KGBos/.github/blob/master/docs/documentation-standard.md) when the
   target repository adopts this shared default; apply repository-local
   source-of-truth and evidence rules first.
 - For pull request reviews, follow
-  [`docs/review-guidelines.md`](docs/review-guidelines.md) when reviewing code or
+  [`docs/review-guidelines.md`](https://github.com/KGBos/.github/blob/master/docs/review-guidelines.md) when reviewing code or
   documentation; provide an explicit verdict, structured top-level summary,
   independent verification evidence, and optional inline findings with severity badges.
 - Keep changes within the requested scope; track unrelated findings separately.
