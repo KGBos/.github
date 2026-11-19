@@ -72,6 +72,8 @@ inventory in this repository. The local record must contain:
 - **Readiness evidence:** links and pass/fail/not-tested results for each
   control in the readiness checklist below, with observation date and
   independent verifier.
+- **Hosted-fallback checks:** `none`, or the checks by name, the queue
+  threshold in minutes, and the monthly cap.
 - **Exceptions:** write `none`, or record the approved exception's scope,
   reason, compensating controls, approver, approval link, and expiry/review
   date. An exception cannot authorize another runner host, remove the
@@ -86,8 +88,9 @@ repository and redact sensitive details from public records.
 ## Untrusted pull-request jobs
 
 Treat pull-request code as untrusted until it has been reviewed. Run each
-untrusted job in fresh, disposable isolation on the runner host, and destroy
-that isolation after the job, including canceled jobs. Reusing an ephemeral
+untrusted job in fresh, disposable isolation on the runner host, or on a
+GitHub-hosted runner under *Explicit hosted fallback*, and destroy that
+isolation after the job, including canceled jobs. Reusing an ephemeral
 runner registration alone does not prove per-job isolation.
 
 Untrusted jobs must not:
@@ -139,7 +142,8 @@ evidence for each item and record `pass`, `fail`, or `not tested`:
 7. **No fallback when the runner host is unavailable:** In a controlled
    non-production scheduling check, make no eligible runner available.
    Verify the check remains queued or fails and that no GitHub-hosted
-   or alternate-host job starts. Record the run/check URL and tested commit.
+   or alternate-host job starts other than a listed hosted-fallback check
+   started by explicit dispatch. Record the run/check URL and tested commit.
    If the repository lists hosted-fallback checks, also verify that the
    dispatcher starts nothing unlisted or ineligible, and that a listed check
    starts only by explicit dispatch.
