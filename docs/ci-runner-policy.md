@@ -8,7 +8,10 @@ unverified.
 The designated self-hosted runner host is the sole host for CI across the
 repositories we work on. GitHub-hosted Actions and other hosts are not
 fallback capacity. If the runner host is unavailable, CI must remain visibly
-queued or fail; it must not silently reroute to a different host.
+queued or fail; it must not silently reroute to a different host. The only
+exception is the explicit hosted fallback defined in *Explicit hosted fallback
+for low-privilege checks* below. Automatic, default or silent rerouting stays
+forbidden.
 
 GitHub-hosted Actions minutes have routinely run out before the monthly reset.
 This policy accepts the availability tradeoff of depending on the runner host
@@ -21,6 +24,29 @@ required checks, while its runner selection must conform to this policy. Each
 repository must explicitly adopt this policy and select a runner group scoped
 to that repository on the runner host. This shared document does not
 automatically configure GitHub Actions or inherit into another repository.
+
+## Explicit hosted fallback for low-privilege checks
+
+A check may run on a GitHub-hosted runner only when all of these hold:
+
+1. The adopting repository lists the check by name under *Hosted-fallback
+   checks* in its own adoption record.
+2. The job requests no token permission beyond `contents: read`, receives no
+   repository or organization secret or host credential, needs no LAN, tailnet
+   or host access, and publishes no artifact, image, release or deployment.
+3. The run is for a pull request whose head branch is in the same repository.
+   Never a fork, never a push to the default branch, never a schedule.
+4. A recorded, explicit dispatch starts the run after the designated runner
+   host has left that check queued longer than the repository's stated
+   threshold. A `runs-on` default or automatic retry never starts one.
+5. The run tests the exact current pull-request head and fails if the head has
+   moved. There is at most one fallback run per check and commit.
+6. Hosted minutes are capped monthly by the repository, and the account's
+   Actions budget is $0, so exhaustion stops fallback instead of charging.
+
+A GitHub-hosted job under this section counts as fresh disposable isolation for
+*Untrusted pull-request jobs*. It still must not receive secrets. In every other
+case, an unavailable runner host leaves CI queued or failed.
 
 ## Repository adoption record
 
@@ -49,7 +75,9 @@ inventory in this repository. The local record must contain:
 - **Exceptions:** write `none`, or record the approved exception's scope,
   reason, compensating controls, approver, approval link, and expiry/review
   date. An exception cannot authorize another runner host, remove the
-  no-fallback rule, or weaken the untrusted-job trust boundary.
+  no-fallback rule, or weaken the untrusted-job trust boundary. The explicit
+  hosted fallback is a policy rule, not an exception, and an exception cannot
+  widen it.
 
 Do not include credentials, secret values, or a list of other repositories in
 an adoption record. Keep necessary repository-specific evidence in that
@@ -73,7 +101,7 @@ Untrusted jobs must not:
 The runner group and repository allowlist must be explicit and limited to the
 repositories that have adopted this policy. Do not encode a private repository
 inventory in this public document. A workflow must not add GitHub-hosted or
-alternate-host fallback behavior.
+alternate-host fallback behavior, except the explicit hosted fallback above.
 
 ## Rollout and verification boundary
 
@@ -112,6 +140,9 @@ evidence for each item and record `pass`, `fail`, or `not tested`:
    non-production scheduling check, make no eligible runner available.
    Verify the check remains queued or fails and that no GitHub-hosted
    or alternate-host job starts. Record the run/check URL and tested commit.
+   If the repository lists hosted-fallback checks, also verify that the
+   dispatcher starts nothing unlisted or ineligible, and that a listed check
+   starts only by explicit dispatch.
 
 The independent verifier records their identity, date, evidence links, and
 result in the adoption record. The verifier must be distinct from the PR
